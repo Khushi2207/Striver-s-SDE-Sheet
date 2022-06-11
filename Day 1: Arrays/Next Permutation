@@ -1,0 +1,31 @@
+void nextPermutation(vector<int>& arr) 
+    {
+        vector<int>org=arr;
+        int n=arr.size();
+        int k=0;
+        for(int i=n-1;i>0;i--)
+        {
+            if(arr[i]>arr[i-1])
+            {
+                k=i-1;
+                break;
+            }
+            if(i==1)
+            {
+                reverse(arr.begin(),arr.end());
+                return;
+            }
+        }
+        for(int i=n-1;i>k;i--)
+        {
+            if(arr[i]>arr[k])
+            {
+                swap(arr[i],arr[k]);
+                break;
+            }
+        }
+        sort(arr.begin()+k+1,arr.end());
+        return;
+        
+        
+    }
