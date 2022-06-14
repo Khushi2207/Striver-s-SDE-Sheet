@@ -1,0 +1,16 @@
+int maxLen(vector<int>&arr, int n)
+    {   
+        int ans=0;
+        int sum=0;
+        unordered_map<int,int>mp;
+        mp[0]=-1;
+        for(int i=0;i<n;i++)
+        {
+            sum+=arr[i];
+            if(mp.find(sum)!=mp.end()) // check if already same sum is present if yes than from that element to present sum must be zero
+            ans=max(ans,i-mp[sum]);
+            else // so that it do nat rechange the smallest value to some mid value in case of same sum more than twice
+            mp[sum]=i;
+        }
+        return ans;
+    }
