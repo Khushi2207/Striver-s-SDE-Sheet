@@ -1,0 +1,19 @@
+int Solution::solve(vector<int> &arr, int k) 
+{
+    int xr=0;
+    long long c=0;
+    unordered_map<int,int>mp;
+    for(int i=0;i<arr.size();i++)
+    {
+        xr^=arr[i];
+        if(xr==k)
+        c++;
+        int y=xr^k;
+        if(mp.find(y)!=mp.end())
+        {
+            c+=mp[y];
+        }
+        mp[xr]+=1;
+    }
+    return c;
+}
