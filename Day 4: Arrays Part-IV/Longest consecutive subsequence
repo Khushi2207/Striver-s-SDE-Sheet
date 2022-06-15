@@ -1,0 +1,29 @@
+int findLongestConseqSubseq(int arr[], int N)
+    {
+        //hash_Set
+      set<int>st;
+      for(int i=0;i<N;i++)
+      {
+          st.insert(arr[i]);
+      }
+      int c=1,ans=0;
+      for(int i=0;i<N;i++)
+      {
+          if(st.find(arr[i]-1)!=st.end())
+          {
+              continue;
+          }
+          else
+          {
+              int curr=arr[i];
+              while(st.find(curr+1)!=st.end())
+              {
+                  c++;
+                  curr++;
+              }
+              ans=max(ans,c);
+              c=1;
+          }
+      }
+      return ans;
+    }
