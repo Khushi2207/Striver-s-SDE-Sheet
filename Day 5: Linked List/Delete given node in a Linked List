@@ -1,0 +1,11 @@
+void deleteNode(ListNode* del) 
+    {
+      
+       
+       del->val=del->next->val;
+       ListNode* todelete=del->next;
+       del->next=del->next->next;
+       delete todelete;
+    
+        
+    }
