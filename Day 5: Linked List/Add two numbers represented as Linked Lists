@@ -1,0 +1,65 @@
+// time- O(max(m,n)+O(n+m+max(n,m)
+    Node* reverse(Node* head)
+    {
+        if(head==NULL)
+        return NULL;
+        
+        if(head->next==NULL)
+        return head;
+        
+        Node* curr=head;
+        Node* prev=NULL;
+        Node* nextptr;
+        
+        while(curr!=NULL)
+        {
+            nextptr=curr->next;
+            
+            curr->next=prev;
+            prev=curr;
+            curr=nextptr;
+        }
+        return prev;
+        
+    }
+    
+    
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        if(first==NULL && second==NULL)
+        return NULL;
+        
+        if(first==NULL)
+        return second;
+        
+        if(second==NULL)
+        return first;
+        
+        Node* rev1=reverse(first);
+        Node* rev2=reverse(second);
+        int carry=0;
+        Node* dummyNode=new Node(-1);
+        Node* head=dummyNode;
+        while(rev1!=NULL || rev2!=NULL || carry!=0)
+        {
+            int sum=0;
+            
+            if(rev1!=NULL)
+            {
+                sum+=rev1->data;
+                rev1=rev1->next;
+            }
+            if(rev2!=NULL)
+            {
+                sum+=rev2->data;
+                rev2=rev2->next;
+            }
+            
+            sum+=carry;
+            carry=sum/10;
+            head->next=new Node(sum%10);
+            head=head->next;
+        }
+        return reverse(dummyNode->next);
+        
+    }  
