@@ -1,0 +1,37 @@
+    Node *copyList(Node *head)
+    {
+        Node* curr=head;
+        while(curr!=NULL)
+        {
+            Node* temp=new Node(curr->data);
+            temp->next=curr->next;
+            curr->next=temp;
+            curr=temp->next;
+        }
+        
+        curr=head;
+        while(curr!=NULL)
+        {
+            if(curr->next!=NULL)
+            {
+                if(curr->arb!=NULL)
+                curr->next->arb=curr->arb->next;
+                else
+                curr->next->arb=NULL;
+            }
+            curr=curr->next->next;
+        }
+        Node* org=head;
+        Node* copy=head->next;
+        Node* new_head=copy;
+        while(org!=NULL)
+        {
+            org->next=org->next->next;
+            if(copy->next!=NULL)
+            copy->next=copy->next->next;
+            
+            org=org->next;
+            copy=copy->next;
+        }
+        return new_head;
+    }
