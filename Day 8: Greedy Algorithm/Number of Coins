@@ -1,0 +1,31 @@
+// DP
+	int fun(int n,int s,int coins[],vector<vector<int>>&dp)
+	{
+	    if(s==0)
+	    return 0;
+	    
+	    if(n==0)
+	    return INT_MAX-1;
+	    
+	    if(dp[n][s]!=-1)
+	    return dp[n][s];
+	    
+	    if(coins[n-1]>s)
+	    dp[n][s]=fun(n-1,s,coins,dp);
+	    else
+	    dp[n][s]=min(fun(n-1,s,coins,dp),fun(n,s-coins[n-1],coins,dp)+1);
+	    
+	    return dp[n][s];
+	}
+	
+	int minCoins(int coins[], int n, int s) 
+	{ 
+	   vector<vector<int>>dp(n+1,vector<int>(s+1,-1));
+	   
+	   
+	   if(fun(n,s,coins,dp)==INT_MAX-1)
+	    return -1;
+	    else
+	    return fun(n,s,coins,dp);
+	  
+	} 
