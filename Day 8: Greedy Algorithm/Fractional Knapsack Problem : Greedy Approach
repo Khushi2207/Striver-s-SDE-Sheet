@@ -1,0 +1,27 @@
+static bool cmp(Item a, Item b)
+    {
+        double a1=(double)a.value/(double)a.weight;
+        double a2=(double)b.value/(double)b.weight;
+        
+        return a1>a2;
+    }
+    double fractionalKnapsack(int wt, Item arr[], int n)
+    {
+            sort(arr,arr+n,cmp);
+            double ans=0;
+            for(int i=0;i<n;i++)
+            {
+                if(arr[i].weight < wt)
+                {
+                    ans+=arr[i].value;
+                    wt-=arr[i].weight;
+                }
+                else
+                {
+                    double last=(double)arr[i].value/(double)arr[i].weight;
+                    ans+=(double)last*wt;
+                    break;
+                }
+            }
+            return ans;
+    }
