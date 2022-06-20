@@ -1,0 +1,70 @@
+ // recursion
+    void solve(vector<int>ip,vector<int>op,int sum,vector<vector<int>>&ans,int i,int curr_sum)
+    {
+        if(i>=ip.size())
+            return;
+        
+        if(ip[i]+curr_sum==sum)
+        {
+            op.push_back(ip[i]);
+            ans.push_back(op);
+            return;
+        }
+        
+        if(ip[i]+curr_sum < sum)
+        {
+            vector<int>op1=op;
+            vector<int>op2=op;
+            op2.push_back(ip[i]);
+            solve(ip,op2,sum,ans,i,curr_sum+ip[i]);
+            solve(ip,op1,sum,ans,i+1,curr_sum);
+            return;
+        }
+        if(ip[i]+curr_sum > sum)
+        {
+            solve(ip,op,sum,ans,i+1,curr_sum);
+            return;
+        }
+    }
+    
+    vector<vector<int>> combinationSum(vector<int>&arr, int sum) 
+    {
+        vector<vector<int>>ans;
+        sort(arr.begin(),arr.end());
+        vector<int>ip=arr;
+        vector<int>op;
+        
+        solve(ip,op,sum,ans,0,0);
+        return ans;
+    }
+    //BackTracking
+//     void solve(int i,int sum,vector<int>&temp,vector<int>&arr,vector<vector<int>>&ans)
+//     {
+//         if(sum==0)
+//         {
+//             ans.push_back(temp);
+//             return;
+//         }
+//         if(sum <0)
+//             return;
+        
+//         if(i==arr.size())
+//         return;
+        
+//         solve(i+1,sum,temp,arr,ans);
+//         temp.push_back(arr[i]);
+//         solve(i,sum-arr[i],temp,arr,ans);
+//         temp.pop_back();
+//     }
+    
+    
+//     vector<vector<int>> combinationSum(vector<int>& arr, int sum) 
+//     {
+//         vector<vector<int>>ans;
+//         ans.clear();
+//         vector<int>temp;
+//         solve(0,sum,temp,arr,ans);
+//         return ans;
+        
+        
+//     }
