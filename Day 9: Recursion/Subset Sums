@@ -1,0 +1,20 @@
+void solve(int sum,vector<int>arr,int i,vector<int>&ans)
+    {
+        if(i==arr.size())
+        {
+            ans.push_back(sum);
+            return;
+        }
+        solve(sum+arr[i],arr,i+1,ans);
+        solve(sum,arr,i+1,ans);
+        
+        return;
+    }
+
+
+    vector<int> subsetSums(vector<int> arr, int n)
+    {
+        vector<int>ans;
+        solve(0,arr,0,ans);
+        return ans;
+    }
