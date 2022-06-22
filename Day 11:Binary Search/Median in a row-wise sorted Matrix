@@ -1,0 +1,38 @@
+
+    int lessthanorequal(vector<int>&row,int mid)
+    {
+        int l=0,r=row.size()-1;
+        while(l<=r)
+        {
+            int md=l+(r-l)/2;
+            if(row[md]<=mid)
+            l=md+1;
+            else
+            r=md-1;
+        }
+        return l;
+    }
+
+
+    int median(vector<vector<int>> &matrix, int row, int col)
+    {
+        int t=(row*col)/2;
+        int l=1,r=2000;
+        while(l<=r)
+        {
+            int mid=l+(r-l)/2;
+            int c=0;
+            for(int i=0;i<row;i++)
+            {
+                c+=lessthanorequal(matrix[i],mid);
+            }
+            if(c <= t)
+            {
+                l=mid+1;
+            }
+            else
+            r=mid-1;
+        }
+        return l;
+                 
+    }
