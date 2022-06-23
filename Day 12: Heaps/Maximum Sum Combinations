@@ -1,0 +1,53 @@
+vector<int> Solution::solve(vector<int> &a, vector<int> &b, int c) 
+{
+    int n=a.size();
+    sort(a.begin(),a.end());
+    sort(b.begin(),b.end());
+    if(n==1 || c==1)
+    return vector<int>{a[n-1]+b[n-1]};
+    
+    priority_queue<vector<int>>pq;
+    pq.push({a[n-1]+b[n-1],n-1,n-1});
+    vector<int>ans;
+    set<pair<int,int>>st;
+    st.insert({n-1,n-1});
+    int i=n-1,j=n-1;
+    int k=0;
+    while(k<c)
+    {
+        // c--;
+        int sum=pq.top()[0];
+        i=pq.top()[1];
+        j=pq.top()[2];
+        
+        
+        pq.pop();
+        ans.push_back(sum);
+        k++;
+        
+        if(st.find({i-1,j})==st.end())
+        {
+            pq.push({a[i-1]+b[j],i-1,j});
+            st.insert({i-1,j});
+        }
+        
+        if(st.find({i,j-1})==st.end())
+        {
+            pq.push({a[i]+b[j-1],i,j-1});
+            st.insert({i,j-1});
+        }  
+        
+        // while(pq.size()>c)
+        // {
+        //     pq.pop();
+            
+        // } 
+    }
+    // while(!pq.empty())
+    // {
+    //     int sum=-pq.top()[0];
+    //     ans.push_back(sum);
+    //     pq.pop();
+    // }
+    return ans;
+}
