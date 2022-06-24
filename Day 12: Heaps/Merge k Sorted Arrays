@@ -1,0 +1,21 @@
+vector<int> mergeKArrays(vector<vector<int>> arr, int k)
+    {
+        priority_queue<vector<int>>pq;
+        for(int i=0;i<k;i++)
+        {
+            pq.push({-arr[i][0],i,0});
+        }
+        
+        // pq.push({-arr[1][0],1,0});
+        // pq.push({-arr[2][0],2,0});
+        vector<int>ans;
+        while(!pq.empty())
+        {
+            ans.push_back(-pq.top()[0]);
+            if(arr[pq.top()[1]].size()>pq.top()[2]+1)
+            pq.push({-arr[pq.top()[1]][pq.top()[2]+1],pq.top()[1],pq.top()[2]+1});
+            
+            pq.pop();
+        }
+        return ans;
+    }
