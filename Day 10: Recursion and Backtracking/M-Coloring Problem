@@ -1,0 +1,36 @@
+bool is_safe(bool graph[101][101],int index,int c,vector<int>&col)
+{
+    for(int i=0;i<col.size();i++)
+    {
+        if(graph[index][i] && col[i]==c)
+        return false;
+    }
+    return true;
+}
+
+bool fun(bool graph[101][101],vector<int>&col,int m,int n,int i)
+{
+    if(i==n)
+    return true;
+    
+    for(int c=0;c<m;c++)
+    {
+        if(is_safe(graph,i,c,col))
+        {
+            col[i]=c;
+            if(fun(graph,col,m,n,i+1))
+            return true;
+            else
+            col[i]=-1;
+        }
+    }
+    return false;
+}
+
+
+bool graphColoring(bool graph[101][101], int m, int n) 
+{
+    vector<int>col(n,-1);
+    return fun(graph,col,m,n,0);
+   
+}
