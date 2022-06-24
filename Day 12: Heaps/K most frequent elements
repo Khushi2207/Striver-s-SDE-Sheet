@@ -1,0 +1,24 @@
+vector<int> topKFrequent(vector<int>& nums, int k) 
+    {
+        priority_queue<vector<int>>pq;
+        unordered_map<int,int>mp;
+        for(int i=0;i<nums.size();i++)
+        {
+            mp[nums[i]]+=1;
+        }
+        
+        for(auto it:mp)
+        {
+            pq.push({-it.second,it.first});
+            if(pq.size()>k)
+                pq.pop();
+        }
+        vector<int>ans;
+        while(!pq.empty())
+        {
+            ans.push_back(pq.top()[1]);
+            pq.pop();
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
