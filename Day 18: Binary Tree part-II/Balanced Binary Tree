@@ -1,0 +1,27 @@
+int fun(TreeNode* root,bool &ans)
+    {
+        if(root==NULL)
+            return 0;
+        
+        int lh=fun(root->left,ans);
+        int rh=fun(root->right,ans);
+        
+        if(abs(lh-rh)>1)
+            ans=false;
+        
+        return max(lh,rh)+1;
+    }
+    
+    
+    bool isBalanced(TreeNode* root) 
+    {
+        if(root==NULL)
+            return true;
+        
+        if(root->left==NULL && root->right==NULL)
+            return true;
+        
+        bool ans=true;
+        fun(root,ans);
+     return ans;   
+    }
